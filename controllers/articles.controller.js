@@ -51,4 +51,33 @@ function postComment(req, res, next){
     .catch(console.error)
 }
 
+function updateVote(req, res, next) {
+    
+    const id = req.params.article_id;
+    const query = req.query.vote;
+
+    Articles.findById(id)
+        .then(article => {
+            return article.votes;
+        })
+        .then(newVotes => {
+            if (query === 'up') {
+                newVotes += 1;
+            }
+            else newVotes -= 1;
+           return Articles.update({_id: id}, {votes: newVotes})
+        })
+        .then(() => {
+       
+            return Articles.find({_id : id})
+            .then((article) => {
+       
+                res.send(article)
+
+            })
+         
+        })
+}
+
+
 module.exports = getAllArticles;
