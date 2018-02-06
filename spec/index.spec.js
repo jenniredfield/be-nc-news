@@ -165,4 +165,22 @@ describe('API endpoints', () => {
             })
     });
 
+    describe('/api/users/:username', () => {
+        it('returns details of the user required', () =>{
+
+
+            return request
+                    .get('/api/users/northcoder')
+                    .then(res => {
+
+                        expect(res.body).to.equal('object')
+                        expect(res.body.username).to.equal('northcoder')
+                        expect(res.body.name).to.equal('Awesome Northcoder')
+                      
+                    })
+        });
+
+
+    })
+
 });
