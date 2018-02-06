@@ -173,14 +173,33 @@ describe('API endpoints', () => {
                     .get('/api/users/northcoder')
                     .then(res => {
 
-                        expect(res.body).to.equal('object')
+                        expect(res.body).be.an('object')
                         expect(res.body.username).to.equal('northcoder')
                         expect(res.body.name).to.equal('Awesome Northcoder')
                       
                     })
         });
+    })
 
+    describe('api/comments/:comment_id', () => {
+        it('deletes a comment if its by user northcoder', () =>{
+            const commentId = docs.comments[0]._id;
+         
+            return request
+                    .delete(`/api/comments/${commentId}`)
+                    .then(res => {
 
+             
+                      expect(res.body).to.be.an('object');
+
+                      return request
+                      .get(`/api/comments/${commentId}`)
+                      .then(res=> {
+                        
+                          expect(res.body).to.eql({});
+                      })
+                    })
+        });
     })
 
 });
