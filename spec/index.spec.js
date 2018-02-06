@@ -64,4 +64,105 @@ describe('API endpoints', () => {
 
     });
 
+    it('POST should post a new comment on the article from ID provided', () => {
+
+        const articleId = docs.articles[0]._id;
+
+        return request
+
+            .post(`/api/articles/${articleId}/comments`)
+            .send({
+                comment: "this is a new comment"
+            })
+            .expect(200)
+            .then(res => {
+
+                expect(res.body).to.be.an('object')
+                expect(res.body.body).to.equal("this is a new comment")
+                return request
+                    .get(`/api/articles/${articleId}/comments`)
+                    .then(res => {
+
+                        expect(res.body.length).to.equal(3);
+                        return;
+                    })
+
+            });
+
+    });
+
+    describe('/api/articles/:article_id', () => {
+        it('PUT should increase the votes of an article by one', () => {
+
+            const articleId = docs.articles[0]._id;
+            const votes = docs.articles[0].votes;
+
+            return request
+                .put(`/api/articles/${articleId}?vote=up`)
+                .then(res => {
+                    
+                    expect(res.body).to.be.an('array')
+                 
+                    return request
+                        .get(`/api/articles/${articleId}`)
+                }).then(res => {
+                    expect(res.body.votes).to.equal(1);
+                })
+        })
+    })
+
+    it('PUT should decrease the votes of an article by one with down query', () => {
+
+        const articleId = docs.articles[0]._id;
+        const votes = docs.articles[0].votes;
+
+        return request
+            .put(`/api/articles/${articleId}?vote=down`)
+            .then(res => {
+                
+                expect(res.body).to.be.an('array')
+             
+                return request
+                    .get(`/api/articles/${articleId}`)
+            }).then(res => {
+                expect(res.body.votes).to.equal(-1);
+            })
+    })
+
+    it('PUT should increase the votes of an comment by one', () => {
+
+        const commentId = docs.comments[0]._id;
+        const votes = docs.comments[0].votes;
+
+        return request
+            .put(`/api/comments/${commentId}?vote=up`)
+            .then(res => {
+                
+                expect(res.body).to.be.an('object')
+             
+                return request
+                    .get(`/api/comments/${commentId}`)
+            }).then(res => {
+                expect(res.body.votes).to.equal(1);
+            })
+    });
+
+    it('PUT should decrease the votes of an comment by one with down query', () => {
+
+        const commentId = docs.comments[0]._id;
+        const votes = docs.comments[0].votes;
+
+        return request
+            .put(`/api/comments/${commentId}?vote=down`)
+            .then(res => {
+                
+                expect(res.body).to.be.an('object')
+             
+                return request
+                    .get(`/api/comments/${commentId}`)
+            }).then(res => {
+                expect(res.body.votes).to.equal(-1);
+            })
+    });
+
 });
