@@ -30,5 +30,19 @@ function updateCommentVote(req,res,next){
 }
 
 
+function deleteComment(req,res,next){
+
+    const id = req.params.comment_id;
+
+    Comments.findByIdAndRemove(id)
+    .then(comment =>{
+        
+        res.send(comment)
+
+    })
+
+
+}
+
 
 module.exports = {updateCommentVote, deleteComment, findCommentById, getAllComments};
