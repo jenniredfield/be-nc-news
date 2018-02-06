@@ -25,9 +25,13 @@ mongoose.Promise = Promise;
 mongoose.connect(db)
   .then(() => console.log('successfully connected to', process.env.NODE_ENV))
   .catch(err => console.log('connection failed', err));
-  
+
   app.use(bodyParser.json());
-  
+
+  app.get('/', function(req, res, next){
+        res.send('Your server works!')
+  });
+
   app.use('/api', apiRouter);
 
   app.use('/*', (req, res) => {

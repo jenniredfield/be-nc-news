@@ -8,14 +8,14 @@ const usersRouter = require('./users');
 
 apiRouter.route('/')
 .get((req,res,next) => {
-
+    console.log('hit')
     res.send('Connected to Backend NC News!!');
 });
 
 apiRouter.use('/articles', articlesRouter)
-apiRouter.use('/topics', topicsRouter)
-apiRouter.use('/comments', commentsRouter)
-apiRouter.use('/users', usersRouter)
+// apiRouter.use('/topics', topicsRouter)
+// apiRouter.use('/comments', commentsRouter)
+// apiRouter.use('/users', usersRouter)
 
 
 module.exports = apiRouter;
