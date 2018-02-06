@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const app = express();
 const config = require('./config');
-// const apiRouter = require('./routes/api');
+const apiRouter = require('./routes/api');
 const cors = require('cors');
 
 let db;
@@ -28,7 +28,7 @@ mongoose.connect(db)
   
   app.use(bodyParser.json());
   
-//   app.use('/api', apiRouter);
+  app.use('/api', apiRouter);
 
   app.use('/*', (req, res) => {
     res.status(404).send('Page not found');

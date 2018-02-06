@@ -11,3 +11,11 @@ apiRouter.route('/')
 
     res.send('Connected to Backend NC News!!');
 });
+
+apiRouter.use('/articles', articlesRouter)
+apiRouter.use('/topics', topicsRouter)
+apiRouter.use('/comments', commentsRouter)
+apiRouter.use('/users', usersRouter)
+
+
+module.exports = apiRouter;
