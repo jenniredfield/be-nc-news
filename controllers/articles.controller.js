@@ -32,4 +32,23 @@ function getCommentsFromArticle(req, res, next) {
     })
 }
 
+function postComment(req, res, next){
+  
+    const id = req.params.article_id;
+
+    const comment = new Comments( {
+        body: req.body.comment,
+        belongs_to: id
+      });
+      
+
+    return comment.save()
+    .then(savedComment => {
+   
+        res.send(savedComment)
+        
+    })
+    .catch(console.error)
+}
+
 module.exports = getAllArticles;
