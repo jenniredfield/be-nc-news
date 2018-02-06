@@ -8,15 +8,19 @@ const config = require('./config');
 const apiRouter = require('./routes/api');
 const cors = require('cors');
 
-let db = config.DB.dev;
+let db;
 
-// if(process.env.NODE_ENV !== 'production') {
-//   db = config.DB.test
-// } else {
+if(process.env.NODE_ENV === 'production') {
+    
+  db = process.env.db;
+} else  if(process.env.NODE_ENV === 'dev') {
 
-//   db = process.env.db;
+  db = config.DB.local;
 
-// }
+} else if(process.env.NODE_ENV === 'test') {
+
+    db = config.DB.test;
+}
 
 app.use(cors());
 
