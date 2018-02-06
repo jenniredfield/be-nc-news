@@ -44,5 +44,16 @@ function deleteComment(req,res,next){
 
 }
 
+function findCommentById(req,res,next){
+
+    const id = req.params.comment_id;
+
+    return Comments.findById(id)
+    .then(comment => {
+        res.send(comment);
+    });
+
+}
+
 
 module.exports = {updateCommentVote, deleteComment, findCommentById, getAllComments};
