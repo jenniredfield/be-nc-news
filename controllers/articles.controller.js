@@ -22,4 +22,14 @@ function getAllArticles(req,res,next){
 
 }
 
+function getCommentsFromArticle(req, res, next) {
+
+    const id = req.params.article_id;
+   return Comments.find({ belongs_to: id})
+    .then(comments => {
+      
+        res.send(comments);
+    })
+}
+
 module.exports = getAllArticles;
