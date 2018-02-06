@@ -79,5 +79,15 @@ function updateVote(req, res, next) {
         })
 }
 
+function getArticleById(req,res,next){
+    const id = req.params.article_id;
 
-module.exports = getAllArticles;
+    return Articles.findById(id)
+    .then(article =>{
+
+         res.send(article);
+    })
+}
+
+
+module.exports = { getAllArticles, getCommentsFromArticle, postComment, updateVote, getArticleById };
