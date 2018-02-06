@@ -55,5 +55,16 @@ function findCommentById(req,res,next){
 
 }
 
+function getAllComments(req,res,next){
+
+
+    return Comments.find()
+    .then(comments => {
+     
+        res.send(comments);
+    });
+
+}
+
 
 module.exports = {updateCommentVote, deleteComment, findCommentById, getAllComments};
