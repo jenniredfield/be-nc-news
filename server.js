@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const app = express();
 const config = require('./config');
-const apiRouter = require('./routes/api');
+// const apiRouter = require('./routes/api');
 const cors = require('cors');
 
 let db;
@@ -18,19 +18,17 @@ if(process.env.NODE_ENV !== 'production') {
 
 }
 
-
 app.use(cors());
-
 
 mongoose.Promise = Promise;
 
-mongoose.connect(db, {useMongoClient: true})
+mongoose.connect(db)
   .then(() => console.log('successfully connected to', process.env.NODE_ENV))
   .catch(err => console.log('connection failed', err));
   
   app.use(bodyParser.json());
   
-  app.use('/api', apiRouter);
+//   app.use('/api', apiRouter);
 
   app.use('/*', (req, res) => {
     res.status(404).send('Page not found');
