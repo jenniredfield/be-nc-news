@@ -5,7 +5,7 @@ const { getAllArticles, getCommentsFromArticle, postComment, updateVote, getArti
 
 articlesRouter.route('/')
     .get(getAllArticles);
-    console.log("articlesrouter")
+
 
 articlesRouter.route('/:article_id/comments')
 .get(getCommentsFromArticle)

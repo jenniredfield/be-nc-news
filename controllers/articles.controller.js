@@ -72,7 +72,7 @@ function updateVote(req, res, next) {
        
             return Articles.find({_id : id})
             .then((article) => {
-                console.log(article)
+             
                 res.send({article})
 
             })
