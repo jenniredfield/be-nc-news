@@ -8,6 +8,7 @@ function findUser(req, res, next) {
 
     Users.findOne({username : user})
         .then(user => {
+          
             res.send(user);
         })
 }

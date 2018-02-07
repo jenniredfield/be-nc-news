@@ -23,7 +23,7 @@ function updateCommentVote(req,res,next){
             }).then(() => {
                 return Comments.findById(id)
             }).then((comment) => {
-          
+             
                     res.send(comment)
             });
 
@@ -34,11 +34,14 @@ function deleteComment(req,res,next){
 
     const id = req.params.comment_id;
 
-    Comments.findByIdAndRemove(id)
+    Comments.findById(id)
     .then(comment =>{
-        
-        res.send(comment)
+        if(comment.created_by === 'northcoder')
+          return Comments.findByIdAndRemove(id)
 
+    }).then(comment => {
+
+        res.send(comment)
     })
 
 

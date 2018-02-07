@@ -22,16 +22,16 @@ function saveTopics() {
 
 function saveArticles() {
   const articles = [
-    { title: 'Cats are great', body: 'something', belongs_to: 'cats' },
-    { title: 'Football is fun', body: 'something', belongs_to: 'football' }
+    { title: 'Cats are great', body: 'something', belongs_to: 'cats', votes: 0},
+    { title: 'Football is fun', body: 'something', belongs_to: 'football', votes: 0 }
   ].map(a => new Articles(a).save());
   return Promise.all(articles);
 }
 
 function saveComments(articles) {
   const comments = [
-    { body: 'this is a comment', belongs_to: articles[0]._id, created_by: 'northcoder' },
-    { body: 'this is another comment', belongs_to: articles[0]._id, created_by: 'northcoder' }
+    { body: 'this is a comment', belongs_to: articles[0]._id, created_by: 'northcoder', votes: 0 },
+    { body: 'this is another comment', belongs_to: articles[0]._id, created_by: 'northcoder', votes: 0 }
   ].map(c => new Comments(c).save());
   return Promise.all(comments);
 }

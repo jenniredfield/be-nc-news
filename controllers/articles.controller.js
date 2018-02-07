@@ -17,7 +17,8 @@ function getAllArticles(req,res,next){
                 article.comments = commentsCounts[i]
                 return article;
             })
-            res.json(articles)
+          
+            res.json({articles})
         })
 
 }
@@ -28,7 +29,7 @@ function getCommentsFromArticle(req, res, next) {
    return Comments.find({ belongs_to: id})
     .then(comments => {
       
-        res.send(comments);
+        res.send({comments});
     })
 }
 
@@ -44,7 +45,7 @@ function postComment(req, res, next){
 
     return comment.save()
     .then(savedComment => {
-   
+        
         res.send(savedComment)
         
     })
@@ -71,8 +72,8 @@ function updateVote(req, res, next) {
        
             return Articles.find({_id : id})
             .then((article) => {
-       
-                res.send(article)
+                console.log(article)
+                res.send({article})
 
             })
          
@@ -85,7 +86,7 @@ function getArticleById(req,res,next){
     return Articles.findById(id)
     .then(article =>{
 
-         res.send(article);
+         res.send({article});
     })
 }
 

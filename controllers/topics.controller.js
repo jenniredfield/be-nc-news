@@ -7,7 +7,9 @@ function getAllTopics(req,res,next) {
 
     Topics.find()
     .then((topics)=>{
-        res.send(topics);
+        console.log(topics)
+        
+        res.send({topics});
     })
     .catch(console.error)
 
@@ -31,8 +33,8 @@ function getArticlesByTopicId(req,res,next){
                     article.comments = commentsCount[i];
                     return article;
                 })
-              
-                res.send(articles);
+               
+                res.send({articles});
             })
           
     })

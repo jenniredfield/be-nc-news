@@ -37,7 +37,7 @@ describe('API endpoints', () => {
                 .expect(200)
                 .then(res => {
 
-                    expect(res.body).to.be.an('Array');
+                    expect(res.body).to.be.an('object');
                     expect(res.body.length).to.equal(2);
                     return;
                 });
