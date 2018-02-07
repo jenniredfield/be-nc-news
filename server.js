@@ -13,6 +13,7 @@ let db;
 if(process.env.NODE_ENV === 'production') {
     
   db = process.env.db;
+  
 } else  if(process.env.NODE_ENV === 'dev') {
 
   db = config.DB.local;
