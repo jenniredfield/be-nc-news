@@ -14,9 +14,10 @@ if(process.env.NODE_ENV !== 'production') {
   db = "mongodb://localhost/northcoders-news-api-test";
   } else {
   
-  db = process.env.db || config.DB.dev;
+  db = process.env.db;
   
   }
+
 app.use(cors());
 
 mongoose.Promise = Promise;
