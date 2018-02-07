@@ -10,19 +10,13 @@ const cors = require('cors');
 
 let db;
 
-if(process.env.NODE_ENV === 'production') {
-    
-  db = process.env.db;
+if(process.env.NODE_ENV !== 'production') {
+  db = "mongodb://localhost/northcoders-news-api-test";
+  } else {
   
-} else  if(process.env.NODE_ENV === 'dev') {
-
-  db = config.DB.local;
-
-} else if(process.env.NODE_ENV === 'test') {
-
-    db = config.DB.test;
-}
-
+  db = process.env.db || config.DB.dev;
+  
+  }
 app.use(cors());
 
 mongoose.Promise = Promise;
@@ -30,7 +24,7 @@ mongoose.Promise = Promise;
 mongoose.connect(db)
   .then(() => console.log('successfully connected to', process.env.NODE_ENV))
   .catch(err => console.log('connection failed', err));
-
+  console.log(db)
   app.use(bodyParser.json());
 
   app.get('/', function(req, res, next){
