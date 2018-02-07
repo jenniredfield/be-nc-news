@@ -1,10 +1,11 @@
+process.env.NODE_ENV = 'production';
 if (!process.env.NODE_ENV) process.env.NODE_ENV = 'dev';
 
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const app = express();
-const config = require('./config');
+// const config = require('./config');
 const apiRouter = require('./routes/api');
 const cors = require('cors');
 

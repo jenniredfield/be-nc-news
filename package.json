@@ -2,7 +2,7 @@
   "name": "backend-nc-news",
   "version": "1.0.0",
   "description": "Backend code for Northcoders News Sprint",
-  "main": "server.js",
+  "main": "config.js",
   "scripts": {
     "test": "mocha spec/index.spec.js",
     "start": "node index.js",
