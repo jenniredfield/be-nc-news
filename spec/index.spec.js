@@ -38,7 +38,7 @@ describe('API endpoints', () => {
                 .then(res => {
 
                     expect(res.body).to.be.an('object');
-                    expect(res.body.length).to.equal(2);
+                    expect(res.body.articles.length).to.equal(2);
                     return;
                 });
 
@@ -55,8 +55,8 @@ describe('API endpoints', () => {
                 .get(`/api/articles/${articleId}/comments`)
                 .expect(200)
                 .then(res => {
-                    expect(res.body).to.be.an('Array');
-                    expect(res.body.length).to.equal(2);
+                    expect(res.body).to.be.an('object');
+                    expect(res.body.comments.length).to.equal(2);
                     return;
                 });
 
@@ -76,14 +76,14 @@ describe('API endpoints', () => {
             })
             .expect(200)
             .then(res => {
-
+         
                 expect(res.body).to.be.an('object')
                 expect(res.body.body).to.equal("this is a new comment")
                 return request
                     .get(`/api/articles/${articleId}/comments`)
                     .then(res => {
-
-                        expect(res.body.length).to.equal(3);
+                  
+                        expect(res.body.comments.length).to.equal(3);
                         return;
                     })
 
@@ -101,12 +101,13 @@ describe('API endpoints', () => {
                 .put(`/api/articles/${articleId}?vote=up`)
                 .then(res => {
                     
-                    expect(res.body).to.be.an('array')
+                    expect(res.body).to.be.an('object')
                  
                     return request
                         .get(`/api/articles/${articleId}`)
                 }).then(res => {
-                    expect(res.body.votes).to.equal(1);
+                  
+                    expect(res.body.article.votes).to.equal(1);
                 })
         })
     })
@@ -120,12 +121,12 @@ describe('API endpoints', () => {
             .put(`/api/articles/${articleId}?vote=down`)
             .then(res => {
                 
-                expect(res.body).to.be.an('array')
+                expect(res.body).to.be.an('object')
              
                 return request
                     .get(`/api/articles/${articleId}`)
             }).then(res => {
-                expect(res.body.votes).to.equal(-1);
+                expect(res.body.article.votes).to.equal(-1);
             })
     })
 

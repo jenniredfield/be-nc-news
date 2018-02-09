@@ -5,14 +5,15 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const app = express();
-// const config = require('./config');
+const config = require('./config');
 const apiRouter = require('./routes/api');
 const cors = require('cors');
 
 let db;
 
 if(process.env.NODE_ENV !== 'production') {
-  db = "mongodb://localhost/northcoders-news-api-test";
+  db = config.DB.local;
+  // "mongodb://localhost/northcoders-news-api-test";
   } else {
   
   db = process.env.db;
