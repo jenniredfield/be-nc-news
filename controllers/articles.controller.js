@@ -76,16 +76,15 @@ function updateVote(req, res, next) {
 
     const id = req.params.article_id;
     const query = req.query.vote;
-
+    console.log(req.query.vote)
     if (req.query.vote === undefined) {
-        next({ statusCode: 400, message: "Invalid query type" })
+        next({ statusCode: 400, message: "Please provide a valid query, ie vote=up" })
     }
 
     const querys = ["up", "down"]
 
     if (!querys.includes(query)) {
-        console.log('here')
-        next({ statusCode: 400, message: "Invalid query value" })
+        next({ statusCode: 400, message: "Please provide a valid query format,ie vote=up or vote=down" })
     }
 
     Articles.findById(id)
