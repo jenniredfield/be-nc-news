@@ -78,6 +78,8 @@ function getAllComments(req, res, next) {
         .then(comments => {
 
             res.send(comments);
+        }).catch((error)=> {
+            next(error);
         });
 
 }

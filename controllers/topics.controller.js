@@ -11,7 +11,9 @@ function getAllTopics(req,res,next) {
         
         res.send({topics});
     })
-    .catch(console.error)
+    .catch((error)=>{
+        next(error);
+    })
 
 }
 
