@@ -39,8 +39,18 @@ mongoose.connect(db)
   app.use('/*', (req, res) => {
     res.status(404).send('Page not found');
   });
+
   app.use((err, req, res, next) => {
-    res.status(500).send({err});
+
+    if(err.statusCode){
+  
+    return res.status(err.statusCode).send({message : err.message});
+
+    }
+    else { res.status(500).send({err});}
+
+
+    
   });
 
 module.exports = app;

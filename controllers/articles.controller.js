@@ -4,7 +4,7 @@ const Comments = require('../models/comments');
 const models = require('../models/models')
 
 function getAllArticles(req,res,next){
-
+  
     Articles.find().lean()
         .then((articles)=>{
             const commentsCountPromises = articles.map(article => {
@@ -17,19 +17,26 @@ function getAllArticles(req,res,next){
                 article.comments = commentsCounts[i]
                 return article;
             })
-          
             res.json({articles})
+        }).catch((error) => {
+            next({ statusCode: 500, message: "Unable to retrieve articles, please try again later"})
         })
 
 }
+
 
 function getCommentsFromArticle(req, res, next) {
 
     const id = req.params.article_id;
    return Comments.find({ belongs_to: id})
     .then(comments => {
-      
+      if(comments.length === 0) next({statusCode: 404, message: 'Not found'})//valid ID but not found
         res.send({comments});
+    }).catch((error)=> {
+        if(error.name === "CastError"){
+            return next({statusCode: 400, message: 'Invalid ID.'})  //receive 400code message sent invalid ID such as 'banana'
+        }
+        next(error)
     })
 }
 
@@ -41,7 +48,6 @@ function postComment(req, res, next){
         body: req.body.comment,
         belongs_to: id
       });
-      
 
     return comment.save()
     .then(savedComment => {
@@ -49,13 +55,23 @@ function postComment(req, res, next){
         res.send(savedComment)
         
     })
-    .catch(console.error)
+    .catch((error)=> {
+        next({ statusCode: 500, message: "Unable to post comment"})
+    })
 }
 
 function updateVote(req, res, next) {
     
     const id = req.params.article_id;
     const query = req.query.vote;
+
+    if(req.query.vote === undefined){
+        next({"message" : "Invalid query type"})
+    }
+
+    if(req.query.vote !== "up" || req.query.vote !== "down"){
+        next({"message" : "Invalid query value"})
+    }
 
     Articles.findById(id)
         .then(article => {
@@ -77,7 +93,7 @@ function updateVote(req, res, next) {
 
             })
          
-        })
+        }).catch(next)
 }
 
 function getArticleById(req,res,next){
