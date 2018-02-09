@@ -41,7 +41,7 @@ function deleteComment(req,res,next){
 
     }).then(comment => {
 
-        res.send(comment)
+        res.status(202).send(comment);
     })
 
 

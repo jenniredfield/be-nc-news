@@ -62,6 +62,39 @@ describe('API endpoints', () => {
 
         });
 
+        /*** ERROR HANDLING */
+        it('GET article by ID with non existent ID returns status 404', () => {
+
+            const articleId = "5a7d980c6a5d660aecab81d0"
+
+            return request
+
+                .get(`/api/articles/${articleId}/comments`)
+                .expect(404)
+                .then(res => {
+                    expect(res.body).to.be.an('object');
+                    expect(res.body.message).to.equal('Not found');
+                    return;
+                });
+
+        });
+        /*** ERROR HANDLING */
+        it('GET article by ID with wrong article ID returns status 400', () => {
+
+            const articleId = "banana"
+
+            return request
+
+                .get(`/api/articles/${articleId}/comments`)
+                .expect(400)
+                .then(res => {
+                    expect(res.body).to.be.an('object');
+                    expect(res.body.message).to.equal('Invalid ID.');
+                    return;
+                });
+
+        });
+
     });
 
     it('POST should post a new comment on the article from ID provided', () => {
@@ -74,7 +107,7 @@ describe('API endpoints', () => {
             .send({
                 comment: "this is a new comment"
             })
-            .expect(200)
+            .expect(201)
             .then(res => {
          
                 expect(res.body).to.be.an('object')
@@ -86,19 +119,38 @@ describe('API endpoints', () => {
                         expect(res.body.comments.length).to.equal(3);
                         return;
                     })
+            });
 
+    });
+
+    it('POST does not post a new comment if the article ID provided is nonexistent ', () => {
+
+        const articleId = "5a7d980c6a5d660aecab81d0"
+
+        return request
+
+            .post(`/api/articles/${articleId}/comments`)
+            .send({
+                comment: "this is a new comment"
+            })
+            .expect(404)
+            .then(res => {
+         
+                expect(res.body).to.be.an('object')
+                expect(res.body.message).to.equal("Article not found, check ID")
             });
 
     });
 
     describe('/api/articles/:article_id', () => {
-        it('PUT should increase the votes of an article by one', () => {
+        it.only('PUT should increase the votes of an article by one', () => {
 
             const articleId = docs.articles[0]._id;
             const votes = docs.articles[0].votes;
 
             return request
                 .put(`/api/articles/${articleId}?vote=up`)
+                .expect(202)
                 .then(res => {
                     
                     expect(res.body).to.be.an('object')
@@ -119,6 +171,7 @@ describe('API endpoints', () => {
 
         return request
             .put(`/api/articles/${articleId}?vote=down`)
+            .expect(202)
             .then(res => {
                 
                 expect(res.body).to.be.an('object')
@@ -137,6 +190,7 @@ describe('API endpoints', () => {
 
         return request
             .put(`/api/comments/${commentId}?vote=up`)
+            .expect(202)
             .then(res => {
                 
                 expect(res.body).to.be.an('object')
@@ -155,6 +209,7 @@ describe('API endpoints', () => {
 
         return request
             .put(`/api/comments/${commentId}?vote=down`)
+            .expect(202)
             .then(res => {
                 
                 expect(res.body).to.be.an('object')
@@ -168,10 +223,9 @@ describe('API endpoints', () => {
 
     describe('/api/users/:username', () => {
         it('returns details of the user required', () =>{
-
-
             return request
                     .get('/api/users/northcoder')
+                    .expect(200)
                     .then(res => {
 
                         expect(res.body).be.an('object')
@@ -188,6 +242,7 @@ describe('API endpoints', () => {
          
             return request
                     .delete(`/api/comments/${commentId}`)
+                    .expect(202)
                     .then(res => {
 
              

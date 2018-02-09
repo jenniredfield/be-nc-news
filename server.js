@@ -43,7 +43,7 @@ mongoose.connect(db)
   app.use((err, req, res, next) => {
 
     if(err.statusCode){
-  
+      console.log(err.message)
     return res.status(err.statusCode).send({message : err.message});
 
     }
