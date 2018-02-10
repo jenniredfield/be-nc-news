@@ -49,12 +49,15 @@ function deleteComment(req, res, next) {
 
     Comments.findById(id)
         .then(comment => {
+            if(comment === null) { return next({statusCode: 500, message: "Unable to find comment to delete, check ID"})};
             if (comment.created_by === 'northcoder')
                 return Comments.findByIdAndRemove(id)
 
         }).then(comment => {
 
             res.status(202).send(comment);
+        }).catch((error)=> {
+            next({ statusCode: 500, message: "Unable to delete comment" });
         })
 
 
@@ -66,8 +69,12 @@ function findCommentById(req, res, next) {
 
     return Comments.findById(id)
         .then(comment => {
+
+            if(comment === null) { return next({statusCode: 500, message: "Unable to find comment, check ID"})}
             res.send(comment);
-        });
+        }).catch((error) => {
+            next({statusCode: 500, message: "Unable to find comment"})
+        })
 
 }
 

@@ -24,7 +24,7 @@ function getArticlesByTopicId(req,res,next){
   
     return Articles.find({belongs_to : topic}).lean()
     .then((articles) => {
-      
+            if(articles.length === 0) { return next({statusCode: 404, message: "Unable to find topic name"})}
             const commentsCount = articles.map(article => {
                 return Comments.count({belongs_to: article._id})
             })
@@ -40,7 +40,9 @@ function getArticlesByTopicId(req,res,next){
             })
           
     })
-    .catch(console.error);
+    .catch((error)=> {
+        next(error);
+    });
 }
 
 module.exports = {getAllTopics, getArticlesByTopicId};
