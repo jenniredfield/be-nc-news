@@ -8,8 +8,12 @@ function findUser(req, res, next) {
 
     Users.findOne({username : user})
         .then(user => {
-          
+            if(user === null) { return next({statusCode: 404, message: "User not found"})}
+
             res.send(user);
+
+        }).catch((error)=>{
+            next(error)
         })
 }
 
