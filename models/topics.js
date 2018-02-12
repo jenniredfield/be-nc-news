@@ -1,4 +1,4 @@
-var mongoose = require('mongoose');
+var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
 var TopicSchema = new Schema({
@@ -13,4 +13,4 @@ var TopicSchema = new Schema({
   }
 });
 
-module.exports = mongoose.model('topics', TopicSchema);
+module.exports = mongoose.model("topics", TopicSchema);

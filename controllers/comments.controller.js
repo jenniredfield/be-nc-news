@@ -1,93 +1,93 @@
-const mongoose = require('mongoose');
-const Articles = require('../models/articles')
-const Comments = require('../models/comments');
-const models = require('../models/models')
+const mongoose = require("mongoose");
+const Articles = require("../models/articles");
+const Comments = require("../models/comments");
+const models = require("../models/models");
 
 function updateCommentVote(req, res, next) {
 
-    const id = req.params.comment_id;
-    const query = req.query.vote;
+  const id = req.params.comment_id;
+  const query = req.query.vote;
 
-    if (req.query.vote === undefined) {
-        next({ statusCode: 400, message: "Please provide a valid query, ie vote=up" })
-    }
+  if (req.query.vote === undefined) {
+    next({ statusCode: 400, message: "Please provide a valid query, ie vote=up" });
+  }
 
-    const querys = ["up", "down"]
+  const querys = ["up", "down"];
 
-    if (!querys.includes(query)) {
-        next({ statusCode: 400, message: "Please provide a valid query format,ie vote=up or vote=down" })
-    }
+  if (!querys.includes(query)) {
+    next({ statusCode: 400, message: "Please provide a valid query format,ie vote=up or vote=down" });
+  }
 
 
-    return Comments.findById(id)
-        .then(comment => {
+  return Comments.findById(id)
+    .then(comment => {
 
-            return comment.votes;
-        })
-        .then(newVotes => {
+      return comment.votes;
+    })
+    .then(newVotes => {
 
-            if (query === 'up') {
-                newVotes += 1;
-            }
-            else newVotes -= 1;
-            return Comments.update({ _id: id }, { votes: newVotes })
-        }).then(() => {
-            return Comments.findById(id)
-        }).then((comment) => {
+      if (query === "up") {
+        newVotes += 1;
+      }
+      else newVotes -= 1;
+      return Comments.update({ _id: id }, { votes: newVotes });
+    }).then(() => {
+      return Comments.findById(id);
+    }).then((comment) => {
 
-            res.status(202).send(comment)
-        }).catch((error)=> {
-            next({ statusCode: 500, message: "Unable to update Vote" })
-        })
+      res.status(202).send(comment);
+    }).catch((error)=> {
+      next({ statusCode: 500, message: "Unable to update Vote" });
+    });
 
 }
 
 
 function deleteComment(req, res, next) {
 
-    const id = req.params.comment_id;
+  const id = req.params.comment_id;
 
-    Comments.findById(id)
-        .then(comment => {
-            if(comment === null) { return next({statusCode: 404, message: "Unable to find comment to delete, check ID"})};
-            if (comment.created_by === 'northcoder')
-                return Comments.findByIdAndRemove(id)
+  Comments.findById(id)
+    .then(comment => {
+      if(comment === null) { return next({statusCode: 404, message: "Unable to find comment to delete, check ID"});}
+      if (comment.created_by === "northcoder")
+        return Comments.findByIdAndRemove(id);
 
-        }).then(comment => {
+    }).then(comment => {
 
-            res.status(202).send(comment);
-        }).catch((error)=> {
-            next({ statusCode: 500, message: "Unable to delete comment" });
-        })
+      res.status(202).send(comment);
+    }).catch((error)=> {
+      next({ statusCode: 500, message: "Unable to delete comment" });
+    });
 
 
 }
 
 function findCommentById(req, res, next) {
 
-    const id = req.params.comment_id;
+  const id = req.params.comment_id;
 
-    return Comments.findById(id)
-        .then(comment => {
+  return Comments.findById(id)
+    .then(comment => {
 
-            if(comment === null) { return next({statusCode: 404, message: "Unable to find comment, check ID"})}
-            res.send(comment);
-        }).catch((error) => {
-            next({statusCode: 500, message: "Unable to find comment"})
-        })
+      if(comment === null) { return next({statusCode: 404, message: "Unable to find comment, check ID"});}
+      res.send(comment);
+    }).catch((error) => {
+      next({statusCode: 500, message: "Unable to find comment"});
+    });
 
 }
 
 function getAllComments(req, res, next) {
 
 
-    return Comments.find()
-        .then(comments => {
+  return Comments.find()
+    .then(comments => {
 
-            res.send(comments);
-        }).catch((error)=> {
-            next(error);
-        });
+      res.send(comments);
+    }).catch((error)=> {
+      next(error);
+    });
 
 }
 

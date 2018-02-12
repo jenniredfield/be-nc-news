@@ -1,4 +1,4 @@
-var mongoose = require('mongoose');
+var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
 var CommentSchema = new Schema({
@@ -21,8 +21,8 @@ var CommentSchema = new Schema({
   created_by: {
     type: String,
     required: true,
-    default: 'northcoder'
+    default: "northcoder"
   }
 });
 
-module.exports = mongoose.model('comments', CommentSchema);
+module.exports = mongoose.model("comments", CommentSchema);
