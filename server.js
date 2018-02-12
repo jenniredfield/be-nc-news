@@ -24,7 +24,7 @@ let db;
 // }
 
 if(process.env.NODE_ENV === "production") {
-  db = process.env.DB;
+  db = process.env.db;
 }
 console.log(db);
 console.log(process.env.DB);
