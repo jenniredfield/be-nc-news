@@ -2,7 +2,6 @@
 /*eslint-disable no-unused-vars */
 // process.env.NODE_ENV = "test";
 if (!process.env.NODE_ENV) process.env.NODE_ENV = "dev";
-
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
@@ -27,6 +26,7 @@ let db;
 if(process.env.NODE_ENV === "production") {
   db = process.env.DB;
 }
+console.log(db);
 
 app.use(cors());
 
