@@ -76,7 +76,7 @@ function updateVote(req, res, next) {
 
     const id = req.params.article_id;
     const query = req.query.vote;
-    console.log(req.query.vote)
+  
     if (req.query.vote === undefined) {
         next({ statusCode: 400, message: "Please provide a valid query, ie vote=up" })
     }
@@ -117,7 +117,8 @@ function getArticleById(req, res, next) {
 
     return Articles.findById(id)
         .then(article => {
-            if (article.length === 0) next({ statusCode: 404, message: 'Not found' });
+            console.log(article)
+            if (article === null) return next({ statusCode: 404, message: 'Article Not found, check ID' });
             res.send({ article });
         }).catch((error) => {
             next({ statusCode: 500, message: "Unable to retrieve article" })

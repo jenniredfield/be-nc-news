@@ -18,7 +18,7 @@ function getAllTopics(req,res,next) {
 }
 
 
-function getArticlesByTopicId(req,res,next){
+function getArticlesByTopic(req,res,next){
 
     const topic = req.params.topic;
   
@@ -45,4 +45,4 @@ function getArticlesByTopicId(req,res,next){
     });
 }
 
-module.exports = {getAllTopics, getArticlesByTopicId};
+module.exports = {getAllTopics, getArticlesByTopic};

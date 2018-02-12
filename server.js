@@ -1,4 +1,4 @@
-// process.env.NODE_ENV = 'production';
+process.env.NODE_ENV = 'test';
 if (!process.env.NODE_ENV) process.env.NODE_ENV = 'dev';
 
 const express = require('express');
@@ -11,15 +11,17 @@ const cors = require('cors');
 
 let db;
 
-if(process.env.NODE_ENV !== 'production') {
+if(process.env.NODE_ENV === 'dev') {
+ 
   db = config.DB.local;
   // "mongodb://localhost/northcoders-news-api-test";
-  } else {
+  } 
+  else if(process.env.NODE_ENV === 'test') {
   
-  db = process.env.db;
+  db = config.DB.test;
   
   }
-
+console.log(db)
 app.use(cors());
 
 mongoose.Promise = Promise;
@@ -37,7 +39,8 @@ mongoose.connect(db)
   app.use('/api', apiRouter);
 
   app.use('/*', (req, res) => {
-    res.status(404).send('Page not found');
+
+    res.status(404).send('Page Not Found');
   });
 
   app.use((err, req, res, next) => {

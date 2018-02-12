@@ -10,10 +10,10 @@ var log4js = require('log4js');
 var logger = log4js.getLogger();
 var moment = require('moment');
 var DBs = require('../config').DB;
-
-mongoose.connect(DBs.dev, function (err) {
+console.log(DBs.local)
+mongoose.connect(DBs.local, function (err) {
   if (!err) {
-    logger.info(`connected to database ${DBs.dev}`);
+    logger.info(`connected to database ${DBs.local}`);
     mongoose.connection.db.dropDatabase();
     async.waterfall([
       addUsers,
