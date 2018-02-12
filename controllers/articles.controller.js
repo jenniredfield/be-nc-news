@@ -1,6 +1,6 @@
 const Articles = require("../models/articles");
 const Comments = require("../models/comments");
-
+const mongoose = require("mongoose");
 
 function getAllArticles(req, res, next) {
 

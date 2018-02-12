@@ -35,7 +35,7 @@ mongoose.Promise = Promise;
 mongoose.connect(db)
   .then(() => console.log("successfully connected to", process.env.NODE_ENV))
   .catch(err => console.log("connection failed", err));
-
+console.log(db)
 app.use(bodyParser.json());
 
 app.get("/", function(req, res, next){
