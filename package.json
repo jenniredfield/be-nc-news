@@ -4,7 +4,7 @@
   "description": "Backend code for Northcoders News Sprint",
   "main": "config.js",
   "scripts": {
-    "test": "mocha spec/topics.spec.js",
+    "test": "mocha spec/index.spec.js",
     "start": "node index.js",
     "dev": "nodemon index.js",
     "lint": "eslint ./",

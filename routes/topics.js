@@ -1,5 +1,3 @@
-var mongoose = require("mongoose");
-var bodyParser = require("body-parser");
 const topicsRouter = require("express").Router();
 const {getAllTopics, getArticlesByTopic} = require("../controllers/topics.controller");
 

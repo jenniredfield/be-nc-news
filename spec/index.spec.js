@@ -65,13 +65,14 @@ describe("API endpoints", () => {
     /*** ERROR HANDLING */
     it("GET comments with non existent article ID returns status 404", () => {
 
-      const articleId = "5a7d980c6a5d660aecab81d0";
-
+      const articleId = "5a81c8b203231f0f8337a57b";
+      
       return request
 
         .get(`/api/articles/${articleId}/comments`)
         .expect(404)
         .then(res => {
+          
           expect(res.body).to.be.an("object");
           expect(res.body.message).to.equal("Not found");
           return;
@@ -90,7 +91,7 @@ describe("API endpoints", () => {
         .expect(400)
         .then(res => {
           expect(res.body).to.be.an("object");
-          expect(res.body.message).to.equal("Invalid ID.");
+          expect(res.body.message).to.equal("Invalid ID");
           return;
         });
     });

@@ -1,5 +1,3 @@
-var mongoose = require("mongoose");
-var bodyParser = require("body-parser");
 const commentsRouter = require("express").Router();
 const {updateCommentVote, deleteComment, findCommentById, getAllComments} = require("../controllers/comments.controller");
 

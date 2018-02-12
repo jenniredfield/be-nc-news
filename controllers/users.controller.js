@@ -1,6 +1,4 @@
-const mongoose = require("mongoose");
 const Users = require("../models/users");
-const models = require("../models/models");
 
 function findUser(req, res, next) {
     

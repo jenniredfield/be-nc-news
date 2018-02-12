@@ -1,7 +1,5 @@
-const mongoose = require("mongoose");
-const Articles = require("../models/articles");
 const Comments = require("../models/comments");
-const models = require("../models/models");
+
 
 function updateCommentVote(req, res, next) {
 
@@ -36,7 +34,7 @@ function updateCommentVote(req, res, next) {
     }).then((comment) => {
 
       res.status(202).send(comment);
-    }).catch((error)=> {
+    }).catch(()=> {
       next({ statusCode: 500, message: "Unable to update Vote" });
     });
 
@@ -56,7 +54,7 @@ function deleteComment(req, res, next) {
     }).then(comment => {
 
       res.status(202).send(comment);
-    }).catch((error)=> {
+    }).catch(()=> {
       next({ statusCode: 500, message: "Unable to delete comment" });
     });
 
@@ -72,7 +70,7 @@ function findCommentById(req, res, next) {
 
       if(comment === null) { return next({statusCode: 404, message: "Unable to find comment, check ID"});}
       res.send(comment);
-    }).catch((error) => {
+    }).catch(() => {
       next({statusCode: 500, message: "Unable to find comment"});
     });
 

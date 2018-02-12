@@ -1,5 +1,3 @@
-var mongoose = require("mongoose");
-var bodyParser = require("body-parser");
 const apiRouter = require("express").Router();
 const topicsRouter = require("./topics");
 const articlesRouter = require("./articles");
@@ -10,6 +8,7 @@ apiRouter.route("/")
   .get((req,res,next) => {
  
     res.send("Connected to Backend NC News!!");
+    next();
   });
 
 apiRouter.use("/articles", articlesRouter);

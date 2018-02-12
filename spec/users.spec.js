@@ -38,6 +38,19 @@ describe("API endpoints", () => {
 
         });
     });
+
+    it("return 404 'User not found' if username was mispelled", () => {
+      return request
+        .get("/api/users/northcoderrrss")
+        .expect(404)
+        .then(res => {
+
+          expect(res.body).be.an("object");
+          expect(res.body.message).to.equal("User not found");
+
+
+        });
+    });
   });
 
 });

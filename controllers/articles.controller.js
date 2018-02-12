@@ -1,7 +1,6 @@
-const mongoose = require("mongoose");
 const Articles = require("../models/articles");
 const Comments = require("../models/comments");
-const models = require("../models/models");
+
 
 function getAllArticles(req, res, next) {
 
@@ -18,7 +17,7 @@ function getAllArticles(req, res, next) {
         return article;
       });
       res.json({ articles });
-    }).catch((error) => {
+    }).catch(() => {
       next({ statusCode: 500, message: "Unable to retrieve articles, please try again later" });
     });
 
@@ -30,11 +29,12 @@ function getCommentsFromArticle(req, res, next) {
   const id = req.params.article_id;
   return Comments.find({ belongs_to: id })
     .then(comments => {
-      if (comments.length === 0) next({ statusCode: 404, message: "Not found" });//valid ID but not found
+
+      if (comments.length === 0) return next({ statusCode: 404, message: "Not found" });//valid ID but not found
       res.send({ comments });
     }).catch((error) => {
       if (error.name === "CastError") {
-        return next({ statusCode: 400, message: "Invalid ID." });  //receive 400code message sent invalid ID such as 'banana'
+        return next({ statusCode: 400, message: "Invalid ID" });  //receive 400code message sent invalid ID such as 'banana'
       }
       next(error);
     });
@@ -62,7 +62,7 @@ function postComment(req, res, next) {
         res.status(201).send(savedComment);
 
       })
-      .catch((error) => {
+      .catch(() => {
               
         next({ statusCode: 500, message: "Unable to post comment" });
       });
@@ -107,7 +107,7 @@ function updateVote(req, res, next) {
 
         });
 
-    }).catch((error) => {
+    }).catch(() => {
       next({ statusCode: 500, message: "Unable to update Vote" });
     });
 }
@@ -117,10 +117,10 @@ function getArticleById(req, res, next) {
 
   return Articles.findById(id)
     .then(article => {
-      console.log(article);
+     
       if (article === null) return next({ statusCode: 404, message: "Article Not found, check ID" });
       res.send({ article });
-    }).catch((error) => {
+    }).catch(() => {
       next({ statusCode: 500, message: "Unable to retrieve article" });
     });
 }

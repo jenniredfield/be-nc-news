@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+/*eslint-disable no-unused-vars */
 process.env.NODE_ENV = "test";
 if (!process.env.NODE_ENV) process.env.NODE_ENV = "dev";
 
@@ -21,7 +23,7 @@ else if(process.env.NODE_ENV === "test") {
   db = config.DB.test;
   
 }
-console.log(db);
+
 app.use(cors());
 
 mongoose.Promise = Promise;
@@ -29,7 +31,7 @@ mongoose.Promise = Promise;
 mongoose.connect(db)
   .then(() => console.log("successfully connected to", process.env.NODE_ENV))
   .catch(err => console.log("connection failed", err));
-console.log(db);
+
 app.use(bodyParser.json());
 
 app.get("/", function(req, res, next){
@@ -38,7 +40,7 @@ app.get("/", function(req, res, next){
 
 app.use("/api", apiRouter);
 
-app.use("/*", (req, res) => {
+app.use("/*", (req, res, next) => {
 
   res.status(404).send("Page Not Found");
 });
