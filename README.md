@@ -30,15 +30,15 @@ Navigate to folder:
 ```
 cd BE-NC-News-Feb 
 ```
-## Install dependencies:
+Install dependencies:
 ```
 npm install
 ```
-## To run server locally:
+ To run server locally:
 ```
 npm run dev
 ```
-## To run tests
+To run tests
 Run mongo on your terminal
 ```
 mongod
