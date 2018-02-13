@@ -4,7 +4,7 @@ const seed = require("../seed/test.seed");
 const mongoose = require("mongoose");
 const server = require("../server");
 const request = require("supertest")(server);
-
+const db = "mongodb://localhost/northcoders-news-api-test";
 
 
 describe("API endpoints", () => {
@@ -12,7 +12,9 @@ describe("API endpoints", () => {
 
   beforeEach(function () {
 
-    return mongoose.connection.dropDatabase()
+    const p = mongoose.connection.readyState === 0 ? mongoose.connect(db) : Promise.resolve();
+
+    return p
       .then(() => {
         return seed();
       });

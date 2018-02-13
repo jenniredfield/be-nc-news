@@ -4,22 +4,23 @@ const seed = require("../seed/test.seed");
 const mongoose = require("mongoose");
 const server = require("../server");
 const request = require("supertest")(server);
-
+const db = "mongodb://localhost/northcoders-news-api-test";
 
 describe("API endpoints", () => {
   let docs = {};
 
   beforeEach(function () {
 
-    return mongoose.connection.dropDatabase()
+    const p = mongoose.connection.readyState === 0 ? mongoose.connect(db) : Promise.resolve();
+
+    return p
       .then(() => {
         return seed();
       })
       .then(data => {
 
         docs = data;
-        
-        // console.log(docs)
+
       });
 
   });
@@ -33,7 +34,7 @@ describe("API endpoints", () => {
   describe("api/comments/:comment_id", () => {
 
     it("GET returns the comment of ID provided", () => {
-      this.timeout(5000);
+ 
       const commentId = docs.comments[0]._id;
 
       return request
