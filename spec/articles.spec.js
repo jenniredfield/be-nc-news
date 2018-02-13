@@ -19,13 +19,14 @@ describe("API endpoints", () => {
       .then(data => {
 
         docs = data;
+        return;
         // console.log(docs)
       });
 
   });
 
   after(function () {
-
+    console.log("disconnect")
     return mongoose.disconnect();
   });
 
@@ -90,7 +91,7 @@ describe("API endpoints", () => {
         .expect(400)
         .then(res => {
           expect(res.body).to.be.an("object");
-          expect(res.body.message).to.equal("Invalid ID.");
+          expect(res.body.message).to.equal("Invalid ID");
           return;
         });
     });
@@ -237,7 +238,6 @@ describe("API endpoints", () => {
     it("PUT returns with error message if query value provided is invalid", () => {
 
       const articleId = docs.articles[0]._id;
-  
 
       return request
         .put(`/api/articles/${articleId}?vote=banana`)
@@ -246,7 +246,7 @@ describe("API endpoints", () => {
 
           expect(res.body).to.be.an("object");
           expect(res.body.message).to.equal("Please provide a valid query format,ie vote=up or vote=down");
-
+          
         });
     });
   });

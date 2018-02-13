@@ -6,28 +6,28 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const app = express();
-// const config = require("./config");
+const config = require("./config");
 const apiRouter = require("./routes/api");
 const cors = require("cors");
 
 let db;
 
-// if(process.env.NODE_ENV === "dev") {
+if(process.env.NODE_ENV === "dev") {
  
-//   db = config.DB.local;
-//   // "mongodb://localhost/northcoders-news-api-test";
-// } 
-// else if(process.env.NODE_ENV === "test") {
+  db = config.DB.local;
+  // "mongodb://localhost/northcoders-news-api-test";
+} 
+else if(process.env.NODE_ENV === "test") {
   
-//   db = config.DB.test;
+  db = config.DB.test;
 
-// }
-
-if(process.env.NODE_ENV === "production") {
-  db = process.env.db;
 }
-console.log(db);
-console.log(process.env.DB);
+
+// if(process.env.NODE_ENV === "production") {
+//   db = process.env.db;
+// }
+// console.log(db);
+// console.log(process.env.DB);
 
 app.use(cors());
 
