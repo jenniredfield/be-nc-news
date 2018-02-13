@@ -1,3 +1,5 @@
+## Northcoders News Backend
+
 Northcoders News is an interactive full stack news website. This API was made with Node.js, Express.js and MongoDB serving the database.
 
 In order to download and run this project, it is necessary to have installed Node.js, npm and MongoDB on your computer.
@@ -18,7 +20,7 @@ mongo -v
 ```
 Download MongoDB [here](https://docs.mongodb.com/manual/administration/install-community/)
 
-# To download and use this project: 
+## To download and use this project: 
 
 - Open your terminal and navigate to the folder where you want to copy this project
 ```
@@ -45,7 +47,7 @@ Making sure you are on the project folder, on your terminal type:
 ```
 npm  test
 ```
-# API Routes
+## API Routes
 ```
 GET /api/topics
 ```
