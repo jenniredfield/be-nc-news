@@ -18,7 +18,7 @@ mongo -v
 ```
 Download MongoDB [here](https://docs.mongodb.com/manual/administration/install-community/)
 
-#To download and use this project: 
+# To download and use this project: 
 
 - Open your terminal and navigate to the folder where you want to copy this project
 ```
@@ -28,15 +28,15 @@ Navigate to folder:
 ```
 cd BE-NC-News-Feb 
 ```
-##Install dependencies:
+## Install dependencies:
 ```
 npm install
 ```
-##To run server locally:
+## To run server locally:
 ```
 npm run dev
 ```
-##To run tests
+## To run tests
 Run mongo on your terminal
 ```
 mongod
@@ -45,7 +45,7 @@ Making sure you are on the project folder, on your terminal type:
 ```
 npm  test
 ```
-#API Routes
+# API Routes
 ```
 GET /api/topics
 ```
