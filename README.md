@@ -34,6 +34,18 @@ Install dependencies:
 ```
 npm install
 ```
+Run MongoDB on your terminal to start serving the database, type:
+
+```
+mongod
+```
+
+On another terminal tab and on the projects folder level, please seed the database with the command:
+
+```
+node seed/seed
+```
+
  To run server locally:
 ```
 npm run dev

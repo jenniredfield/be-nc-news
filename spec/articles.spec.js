@@ -20,7 +20,6 @@ describe("API endpoints", () => {
 
         docs = data;
         return;
-        // console.log(docs)
       });
 
   });
