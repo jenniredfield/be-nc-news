@@ -46,10 +46,6 @@ On another terminal tab and on the projects folder level, please seed the databa
 node seed/seed
 ```
 
- To run server locally:
-```
-npm run dev
-```
 To run tests
 Run mongo on your terminal
 ```
@@ -59,6 +55,13 @@ Making sure you are on the project folder, on your terminal type:
 ```
 npm  test
 ```
+ To run server locally:
+```
+npm run dev
+```
+
+The server should be accesible on http://localhost:3001
+
 ## API Routes
 ```
 GET /api/topics
