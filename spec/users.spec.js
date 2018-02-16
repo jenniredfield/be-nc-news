@@ -4,7 +4,8 @@ const seed = require("../seed/test.seed");
 const mongoose = require("mongoose");
 const server = require("../server");
 const request = require("supertest")(server);
-const db = "mongodb://localhost/northcoders-news-api-test";
+const config = require("../config.js");
+const db = config.DB.test;
 
 
 describe("API endpoints", () => {
@@ -24,7 +25,6 @@ describe("API endpoints", () => {
 
     return mongoose.disconnect();
   });
-
 
 
   describe("/api/users/:username", () => {
@@ -56,5 +56,4 @@ describe("API endpoints", () => {
   });
 
 });
-
 

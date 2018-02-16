@@ -1,5 +1,4 @@
 const articlesRouter = require("express").Router();
-const mongoose = require("mongoose");
 const { getAllArticles, getCommentsFromArticle, postComment, updateVote, getArticleById } = require("../controllers/articles.controller");
 
 articlesRouter.route("/")
@@ -14,7 +13,6 @@ articlesRouter.route("/:article_id/comments")
 articlesRouter.route("/:article_id")
   .put(updateVote)
   .get(getArticleById);
-
 
 
 module.exports = articlesRouter;

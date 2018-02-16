@@ -1,5 +1,4 @@
 const topicsRouter = require("express").Router();
-const mongoose = require("mongoose");
 const {getAllTopics, getArticlesByTopic} = require("../controllers/topics.controller");
 
 

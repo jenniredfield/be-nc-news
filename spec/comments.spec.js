@@ -4,7 +4,8 @@ const seed = require("../seed/test.seed");
 const mongoose = require("mongoose");
 const server = require("../server");
 const request = require("supertest")(server);
-const db = "mongodb://localhost/northcoders-news-api-test";
+const config = require("../config.js");
+const db = config.DB.test;
 
 describe("API endpoints", () => {
   let docs = {};
@@ -137,7 +138,6 @@ describe("API endpoints", () => {
     });
 
 
-
     it("DELETE deletes a comment if its by user northcoder", () => {
       const commentId = docs.comments[0]._id;
 
@@ -168,5 +168,4 @@ describe("API endpoints", () => {
 
 
 });
-
 

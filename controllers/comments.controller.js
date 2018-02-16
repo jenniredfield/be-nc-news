@@ -67,7 +67,6 @@ function findCommentById(req, res, next) {
 
   return Comments.findById(id)
     .then(comment => {
-
       if(comment === null) { return next({statusCode: 404, message: "Unable to find comment, check ID"});}
       res.send(comment);
     }).catch(() => {
@@ -78,10 +77,8 @@ function findCommentById(req, res, next) {
 
 function getAllComments(req, res, next) {
 
-
   return Comments.find()
     .then(comments => {
-
       res.send(comments);
     }).catch((error)=> {
       next(error);

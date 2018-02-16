@@ -1,6 +1,6 @@
 const Articles = require("../models/articles");
 const Comments = require("../models/comments");
-const mongoose = require("mongoose");
+
 
 function getAllArticles(req, res, next) {
 
@@ -29,7 +29,6 @@ function getCommentsFromArticle(req, res, next) {
   const id = req.params.article_id;
   return Comments.find({ belongs_to: id })
     .then(comments => {
-
       if (comments.length === 0) return next({ statusCode: 404, message: "Not found" });//valid ID but not found
       res.send({ comments });
     }).catch((error) => {
@@ -45,22 +44,17 @@ function postComment(req, res, next) {
   const id = req.params.article_id;
 
   Articles.findById(id).then(article => {
-
     if (article === null) next({ statusCode: 404, message: "Article not found, check ID" });
     else if (article.length === 0) next({ statusCode: 404, message: "Article not found, check ID" });
     return id;
   }).then(id => {
-
     const comment = new Comments({
       body: req.body.comment,
       belongs_to: id
     });
-
     return comment.save()
       .then(savedComment => {
-
         res.status(201).send(savedComment);
-
       })
       .catch(() => {
               
@@ -76,7 +70,6 @@ function updateVote(req, res, next) {
 
   const id = req.params.article_id;
   const query = req.query.vote;
-  
   if (req.query.vote === undefined) {
     next({ statusCode: 400, message: "Please provide a valid query, ie vote=up" });
   }
@@ -117,7 +110,6 @@ function getArticleById(req, res, next) {
 
   return Articles.findById(id)
     .then(article => {
-     
       if (article === null) return next({ statusCode: 404, message: "Article Not found, check ID" });
       res.send({ article });
     }).catch(() => {

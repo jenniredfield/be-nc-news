@@ -6,7 +6,6 @@ const server = require("../server");
 const request = require("supertest")(server);
 
 
-
 describe("API endpoints", () => {
   let docs = {};
 
@@ -28,7 +27,6 @@ describe("API endpoints", () => {
    
     return mongoose.disconnect();
   });
-
 
 
   describe("/articles", () => {
@@ -251,5 +249,4 @@ describe("API endpoints", () => {
   });
 
 });
-
 
