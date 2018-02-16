@@ -27,7 +27,6 @@ else {
   db = process.env.db;
 }
 
-
 app.use(cors());
 
 app.use(express.static("public"));
@@ -59,7 +58,6 @@ app.use((err, req, res, next) => {
 
   }
   else { res.status(500).send({err});}
-
     
 });
 

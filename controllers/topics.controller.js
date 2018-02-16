@@ -14,7 +14,6 @@ function getAllTopics(req,res,next) {
 
 }
 
-
 function getArticlesByTopic(req,res,next){
 
   const topic = req.params.topic;

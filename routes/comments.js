@@ -7,7 +7,6 @@ commentsRouter.route("/")
 commentsRouter.route("/:comment_id")
   .put(updateCommentVote)
   .delete(deleteComment);
-    
 
 commentsRouter.route("/:comment_id")
   .get(findCommentById);

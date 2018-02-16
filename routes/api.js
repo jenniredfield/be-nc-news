@@ -16,5 +16,4 @@ apiRouter.use("/topics", topicsRouter);
 apiRouter.use("/comments", commentsRouter);
 apiRouter.use("/users", usersRouter);
 
-
 module.exports = apiRouter;

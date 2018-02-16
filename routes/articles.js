@@ -4,15 +4,12 @@ const { getAllArticles, getCommentsFromArticle, postComment, updateVote, getArti
 articlesRouter.route("/")
   .get(getAllArticles);
 
-
 articlesRouter.route("/:article_id/comments")
   .get(getCommentsFromArticle)
   .post(postComment);
 
-
 articlesRouter.route("/:article_id")
   .put(updateVote)
   .get(getArticleById);
-
 
 module.exports = articlesRouter;

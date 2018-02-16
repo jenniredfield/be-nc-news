@@ -7,9 +7,7 @@ const request = require("supertest")(server);
 const config = require("../config.js");
 const db = config.DB.test;
 
-
 describe("API endpoints", () => {
-
 
   beforeEach(function () {
 
@@ -25,7 +23,6 @@ describe("API endpoints", () => {
 
     return mongoose.disconnect();
   });
-
 
   describe("/api/users/:username", () => {
     it("returns details of the user required", () => {
@@ -49,7 +46,6 @@ describe("API endpoints", () => {
 
           expect(res.body).be.an("object");
           expect(res.body.message).to.equal("User not found");
-
 
         });
     });

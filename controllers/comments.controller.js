@@ -1,6 +1,5 @@
 const Comments = require("../models/comments");
 
-
 function updateCommentVote(req, res, next) {
 
   const id = req.params.comment_id;
@@ -13,13 +12,11 @@ function updateCommentVote(req, res, next) {
   const querys = ["up", "down"];
 
   if (!querys.includes(query)) {
-    next({ statusCode: 400, message: "Please provide a valid query format,ie vote=up or vote=down" });
+    next({ statusCode: 400, message: "Please provide a valid query format, ie vote=up or vote=down" });
   }
-
 
   return Comments.findById(id)
     .then(comment => {
-
       return comment.votes;
     })
     .then(newVotes => {
@@ -40,7 +37,6 @@ function updateCommentVote(req, res, next) {
 
 }
 
-
 function deleteComment(req, res, next) {
 
   const id = req.params.comment_id;
@@ -57,7 +53,6 @@ function deleteComment(req, res, next) {
     }).catch(()=> {
       next({ statusCode: 500, message: "Unable to delete comment" });
     });
-
 
 }
 
@@ -85,6 +80,5 @@ function getAllComments(req, res, next) {
     });
 
 }
-
 
 module.exports = { updateCommentVote, deleteComment, findCommentById, getAllComments };

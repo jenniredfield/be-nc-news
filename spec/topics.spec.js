@@ -7,9 +7,7 @@ const request = require("supertest")(server);
 const config = require("../config.js");
 const db = config.DB.test;
 
-
 describe("API endpoints", () => {
-
   
   beforeEach(function () {
     
@@ -25,7 +23,6 @@ describe("API endpoints", () => {
 
     return mongoose.disconnect();
   });
-
 
   describe("/api/topics", () => {
 

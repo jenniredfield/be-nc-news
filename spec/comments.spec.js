@@ -31,7 +31,6 @@ describe("API endpoints", () => {
     return mongoose.disconnect();
   });
 
-
   describe("api/comments/:comment_id", () => {
 
     it("GET returns the comment of ID provided", () => {
@@ -68,7 +67,6 @@ describe("API endpoints", () => {
     it("PUT should increase the votes of an comment by one", () => {
 
       const commentId = docs.comments[0]._id;
- 
 
       return request
         .put(`/api/comments/${commentId}?vote=up`)
@@ -108,7 +106,6 @@ describe("API endpoints", () => {
     it("PUT updateCommentVote returns with error message if query provided was mispelled", () => {
 
       const commentId = docs.comments[0]._id;
-    
 
       return request
         .put(`/api/articles/${commentId}?ote=up`)
@@ -137,7 +134,6 @@ describe("API endpoints", () => {
         });
     });
 
-
     it("DELETE deletes a comment if its by user northcoder", () => {
       const commentId = docs.comments[0]._id;
 
@@ -145,7 +141,6 @@ describe("API endpoints", () => {
         .delete(`/api/comments/${commentId}`)
         .expect(202)
         .then(res => {
-
 
           expect(res.body).to.be.an("object");
 
@@ -165,7 +160,6 @@ describe("API endpoints", () => {
         });
     });
   });
-
 
 });
 

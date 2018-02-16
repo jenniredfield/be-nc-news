@@ -5,7 +5,6 @@ const mongoose = require("mongoose");
 const server = require("../server");
 const request = require("supertest")(server);
 
-
 describe("API endpoints", () => {
   let docs = {};
 
@@ -27,7 +26,6 @@ describe("API endpoints", () => {
    
     return mongoose.disconnect();
   });
-
 
   describe("/articles", () => {
     it("GET should return all of the articles contained in the database", () => {
@@ -138,11 +136,9 @@ describe("API endpoints", () => {
 
     });
 
-
   });
 
   describe("articles/:article_id", () => {
-
 
     it("GET getArticleById returns the article of Id provided", () => {
 
@@ -181,7 +177,6 @@ describe("API endpoints", () => {
 
       const articleId = docs.articles[0]._id;
 
-
       return request
         .put(`/api/articles/${articleId}?vote=up`)
         .expect(202)
@@ -200,7 +195,6 @@ describe("API endpoints", () => {
     it("PUT should decrease the votes of an article by one with down query", () => {
 
       const articleId = docs.articles[0]._id;
-     
 
       return request
         .put(`/api/articles/${articleId}?vote=down`)

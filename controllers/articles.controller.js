@@ -1,7 +1,6 @@
 const Articles = require("../models/articles");
 const Comments = require("../models/comments");
 
-
 function getAllArticles(req, res, next) {
 
   Articles.find().lean()
@@ -23,17 +22,16 @@ function getAllArticles(req, res, next) {
 
 }
 
-
 function getCommentsFromArticle(req, res, next) {
 
   const id = req.params.article_id;
   return Comments.find({ belongs_to: id })
     .then(comments => {
-      if (comments.length === 0) return next({ statusCode: 404, message: "Not found" });//valid ID but not found
+      if (comments.length === 0) return next({ statusCode: 404, message: "Not found" });
       res.send({ comments });
     }).catch((error) => {
       if (error.name === "CastError") {
-        return next({ statusCode: 400, message: "Invalid ID" });  //receive 400code message sent invalid ID such as 'banana'
+        return next({ statusCode: 400, message: "Invalid ID" });  
       }
       next(error);
     });
@@ -62,7 +60,6 @@ function postComment(req, res, next) {
       });
 
   });
-
 
 }
 
@@ -116,6 +113,5 @@ function getArticleById(req, res, next) {
       next({ statusCode: 500, message: "Unable to retrieve article" });
     });
 }
-
 
 module.exports = { getAllArticles, getCommentsFromArticle, postComment, updateVote, getArticleById };
