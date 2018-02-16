@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 /*eslint-disable no-unused-vars */
-// process.env.NODE_ENV = "test";
+
 if (!process.env.NODE_ENV) process.env.NODE_ENV = "dev";
 const express = require("express");
 const mongoose = require("mongoose");
@@ -12,22 +12,20 @@ const cors = require("cors");
 
 let db;
 
-if(process.env.NODE_ENV === "dev") {
+if(process.env.NODE_ENV === "test") {
  
-  db = config.DB.local;
-  // "mongodb://localhost/northcoders-news-api-test";
+  db = "mongodb://localhost/northcoders-news-api-test";
+
 } 
-else if(process.env.NODE_ENV === "test") {
+else if (process.env.NODE_ENV === "dev") {
   
-  db = config.DB.test;
+  db = "mongodb://localhost/northcoders-news-api";
 
 }
+else {
+  db = process.env.db;
+}
 
-// if(process.env.NODE_ENV === "production") {
-//   db = process.env.db;
-// }
-// console.log(db);
-// console.log(process.env.DB);
 
 app.use(cors());
 
