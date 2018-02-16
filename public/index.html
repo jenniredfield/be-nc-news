@@ -1,0 +1,83 @@
+<!doctype html>
+
+<html lang="en">
+    <head>
+
+        <meta charset="utf-8">
+
+        <title>Backend NC News</title>
+        <meta name="description" content="The HTML5 Herald">
+        <link rel="stylesheet" href="main.css">
+       
+
+
+    </head>
+
+    <body>
+
+        <h1>You have reached Jen's NC News server :)</h1>
+        <h2>API Routes</h2>
+        <div>
+            <p class="route">GET /api/topics</p>
+            <p>Get all the topics</p>
+        </div>
+
+        <div>
+            <p class="route">GET /api/topics/:topic_id/articles</p>
+            <p>Return all the articles for a certain topic</p>
+        </div>
+
+        <div>
+            <p class="route">GET /api/articles</p>
+            <p>Returns all the articles</p>
+        </div>
+
+        <div>
+            <p class="route">GET /api/articles/:article_id</p>
+            <p>Returns a JSON object with the article information for the specified article</p>
+        </div>
+
+        <div>
+            <p class="route">GET /api/articles/:article_id/comments</p>
+            <p>Get all the comments for an individual article</p>
+        </div>
+
+        <div>
+            <p class="route">POST /api/articles/:article_id/comments</p>
+            <p>Add a new comment to an article. This route requires a JSON body with a comment key and value pair e.g: {"comment": "This is my new comment"}</p>
+        </div>
+
+        <div>
+            <p class="route">PUT /api/articles/:article_id</p>
+            <p>Increment or Decrement the votes of an article by one. This route requires a vote query of 'up' or 'down' e.g: /api/articles/:article_id?vote=up</p>
+        </div>
+
+        <div>
+            <p class="route">GET /api/comments/:comment_id</p>
+            <p>Get comment by its id</p>
+        </div>
+
+        <div>
+            <p class="route">PUT /api/comments/:comment_id</p>
+            <p>Increment or Decrement the votes of a comment by one. This route requires a vote query of 'up' or 'down' e.g: /api/comments/:comment_id?vote=down</p>
+        </div>
+
+
+        <div>
+            <p class="route">DELETE /api/comments/:comment_id</p>
+            <p>Deletes a comment</p>
+        </div>
+
+        <div>
+            <p class="route">GET /api/users</p>
+            <p>Returns all users</p>
+        </div>
+
+        <div>
+            <p class="route">GET /api/users/:username</p>
+            <p>Returns a JSON object with the profile data for the specified user.</p>
+        </div>
+
+
+    </body>
+</html>

@@ -26,7 +26,7 @@ describe("API endpoints", () => {
   });
 
   after(function () {
-    console.log("disconnect")
+   
     return mongoose.disconnect();
   });
 

@@ -9,17 +9,18 @@ const app = express();
 const config = require("./config");
 const apiRouter = require("./routes/api");
 const cors = require("cors");
+const path = require("path");
 
 let db;
 
 if(process.env.NODE_ENV === "test") {
  
-  db = "mongodb://localhost/northcoders-news-api-test";
+  db = config.DB.test;
 
 } 
 else if (process.env.NODE_ENV === "dev") {
   
-  db = "mongodb://localhost/northcoders-news-api";
+  db = config.DB.dev;
 
 }
 else {
@@ -28,6 +29,8 @@ else {
 
 
 app.use(cors());
+
+app.use(express.static("public"));
 
 mongoose.Promise = Promise;
 
@@ -38,7 +41,7 @@ mongoose.connect(db)
 app.use(bodyParser.json());
 
 app.get("/", function(req, res, next){
-  res.send("Your server works!");
+  res.sendFile(path.join(__dirname + "/public/index.html"));
 });
 
 app.use("/api", apiRouter);
